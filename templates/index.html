@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gesture RC Car — Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body>
+<!-- Loading overlay — shown while ONNX model downloads -->
+<div class="loading-overlay" id="loading-overlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-title">Gesture RC Car</div>
+  <div class="loading-text" id="loading-text">
+    Loading ML model...<br>
+    <small>First load downloads ~10MB model</small>
+  </div>
+</div>
+<header>
+  <div class="header-left">
+    <span class="logo">⬡</span>
+    <div>
+      <h1>Gesture RC Car</h1>
+      <p class="subtitle">Real-time hand gesture control</p>
+    </div>
+  </div>
+  <div class="status-pills">
+    <span class="pill" id="pill-cam">● Camera</span>
+    <span class="pill" id="pill-esp">● ESP8266</span>
+    <span class="pill" id="pill-ws">● WebSocket</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- Left column: camera feed -->
+  <section class="card feed-card">
+    <h2>Live Camera Feed</h2>
+    <div class="video-wrapper">
+      <img id="video-feed" src="/video" alt="Camera stream"/>
+      <div class="fps-badge" id="fps-badge">0 fps</div>
+    </div>
+  </section>
+
+  <!-- Right column: controls and metrics -->
+  <section class="right-panel">
+
+    <!-- Active command -->
+    <div class="card command-card">
+      <h2>Active Command</h2>
+      <div class="command-display" id="command-display">STOP</div>
+      <div class="gesture-row">
+        <span class="label-tag">Gesture</span>
+        <span id="gesture-label">—</span>
+      </div>
+      <div class="conf-row">
+        <span class="label-tag">Confidence</span>
+        <div class="conf-bar-wrap">
+          <div class="conf-bar" id="conf-bar"></div>
+          <span id="conf-value">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Direction pad (visual only, mirrors gesture state) -->
+    <div class="card dpad-card">
+      <h2>Direction</h2>
+      <div class="dpad">
+        <div class="dpad-btn" id="btn-forward">▲</div>
+        <div class="dpad-row">
+          <div class="dpad-btn" id="btn-left">◀</div>
+          <div class="dpad-btn stop-btn" id="btn-stop">■</div>
+          <div class="dpad-btn" id="btn-right">▶</div>
+        </div>
+        <div class="dpad-btn" id="btn-reverse">▼</div>
+      </div>
+    </div>
+
+    <!-- Session statistics -->
+    <div class="card stats-card">
+      <h2>Session Stats</h2>
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-row"><span>Forward</span><span id="stat-forward">0</span></div>
+        <div class="stat-row"><span>Reverse</span><span id="stat-reverse">0</span></div>
+        <div class="stat-row"><span>Left</span><span id="stat-left">0</span></div>
+        <div class="stat-row"><span>Right</span><span id="stat-right">0</span></div>
+        <div class="stat-row"><span>Stop</span><span id="stat-stop">0</span></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Bottom: command log -->
+  <section class="card log-card">
+    <h2>Command Log</h2>
+    <div class="log-table-wrap">
+      <table class="log-table">
+        <thead>
+          <tr><th>Time</th><th>Command</th><th>Confidence</th></tr>
+        </thead>
+        <tbody id="log-body">
+          <tr><td colspan="3" class="empty-log">Waiting for gestures…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ESP info -->
+  <section class="card esp-card">
+    <h2>ESP8266 Target</h2>
+    <div class="esp-info">
+      <div class="esp-row">
+        <span>IP Address</span>
+        <code>{{ esp_ip }}</code>
+      </div>
+      <div class="esp-row">
+        <span>UDP Port</span>
+        <code>{{ esp_port }}</code>
+      </div>
+      <div class="esp-row">
+        <span>Protocol</span>
+        <code>UDP</code>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="/static/dashboard.js"></script>
+</body>
+</html>

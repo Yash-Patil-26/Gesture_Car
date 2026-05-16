@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Gesture RC Car</title>
+<style>
+:root{
+  --bg:#0f1117;--surface:#1a1d27;--border:#2a2d3a;
+  --text:#e8eaf0;--muted:#6b7080;
+  --green:#00e676;--blue:#4dabf7;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background:var(--bg);color:var(--text);
+  min-height:100dvh;display:flex;flex-direction:column;
+  align-items:center;padding:32px 20px;gap:32px;
+}
+header{text-align:center;}
+header h1{font-size:28px;font-weight:900;margin-bottom:8px;}
+header p{color:var(--muted);font-size:15px;line-height:1.7;}
+.badge{
+  display:inline-block;background:var(--surface);
+  border:1px solid var(--border);border-radius:20px;
+  padding:5px 14px;font-size:12px;color:var(--muted);margin-top:10px;
+}
+section{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:14px;padding:22px;width:100%;max-width:480px;
+}
+section h2{
+  font-size:13px;text-transform:uppercase;letter-spacing:.8px;
+  color:var(--muted);margin-bottom:14px;
+}
+.steps{display:flex;flex-direction:column;gap:12px;}
+.step{display:flex;gap:14px;align-items:flex-start;}
+.num{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--green);color:#000;font-weight:700;
+  font-size:13px;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;
+}
+.step-content p{font-size:14px;line-height:1.6;}
+.step-content small{color:var(--muted);font-size:12px;}
+.wifi-chip{
+  display:inline-block;
+  background:rgba(0,230,118,.1);border:1px solid var(--green);
+  border-radius:6px;padding:2px 10px;font-family:monospace;
+  font-size:14px;color:var(--green);margin:2px 0;
+}
+.url-chip{
+  display:inline-block;
+  background:rgba(77,171,247,.1);border:1px solid var(--blue);
+  border-radius:6px;padding:2px 10px;font-family:monospace;
+  font-size:14px;color:var(--blue);margin:2px 0;
+}
+.gesture-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+}
+.gesture-row{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:8px;padding:10px 12px;
+}
+.gesture-row .cmd{
+  font-size:11px;font-weight:700;letter-spacing:.8px;
+  color:var(--green);margin-bottom:3px;
+}
+.gesture-row .desc{font-size:12px;color:var(--muted);}
+footer{color:var(--muted);font-size:12px;text-align:center;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⬡ Gesture RC Car</h1>
+  <p>Control a real RC car with hand gestures.<br>
+     No apps. No wearables. Just your hand.</p>
+  <span class="badge">MediaPipe · Random Forest · ESP8266 · WebSocket</span>
+</header>
+
+<section>
+  <h2>How to Control the Car</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="num">1</div>
+      <div class="step-content">
+        <p>Power on the car</p>
+        <small>ESP8266 starts broadcasting WiFi automatically</small>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <div class="step-content">
+        <p>Connect phone WiFi to<br>
+           <span class="wifi-chip">GestureCar</span></p>
+        <small>Open network — no password needed</small>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <div class="step-content">
+        <p>Open in phone browser<br>
+           <span class="url-chip">http://192.168.4.1</span></p>
+        <small>The control app loads directly from the car</small>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">4</div>
+      <div class="step-content">
+        <p>Tap Start → show hand to front camera</p>
+        <small>Closing the browser tab stops the car automatically</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Gestures</h2>
+  <div class="gesture-grid">
+    <div class="gesture-row">
+      <div class="cmd">FORWARD</div>
+      <div class="desc">Open palm facing camera</div>
+    </div>
+    <div class="gesture-row">
+      <div class="cmd">STOP</div>
+      <div class="desc">Closed fist</div>
+    </div>
+    <div class="gesture-row">
+      <div class="cmd">LEFT</div>
+      <div class="desc">Index pointing left</div>
+    </div>
+    <div class="gesture-row">
+      <div class="cmd">RIGHT</div>
+      <div class="desc">Index pointing right</div>
+    </div>
+    <div class="gesture-row" style="grid-column:span 2">
+      <div class="cmd">REVERSE</div>
+      <div class="desc">Thumbs down</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  MIT License &nbsp;·&nbsp;
+  <a href="https://github.com/yash-patil-26/Gesture_Car"
+     style="color:var(--blue)">View on GitHub</a>
+</footer>
+
+</body>
+</html>

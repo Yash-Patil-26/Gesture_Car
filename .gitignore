@@ -1,0 +1,63 @@
+# ── Python ─────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual environment ────────────────────────────────────────
+venv/
+env/
+ENV/
+.venv/
+
+# ── Dataset — too large for git ────────────────────────────────
+# 135,000+ images — never commit
+external_images/
+
+# Training data CSV — 43k rows, regenerable
+data/gesture_data.csv
+
+# ── Trained model files ────────────────────────────────────────
+# .pkl files are binary and large — regenerable from data
+model/gesture_model.pkl
+model/label_encoder.pkl
+
+# ── Outputs ────────────────────────────────────────────────────
+# Keep confusion matrix PNG (good for README)
+# outputs/confusion_matrix.png  ← intentionally NOT ignored
+
+# ── IDE and OS files ───────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Environment variables ──────────────────────────────────────
+.env
+.env.local
+*.env
+
+# ── Jupyter notebooks checkpoints ─────────────────────────────
+.ipynb_checkpoints/
+
+# ── Logs ───────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Test artifacts ─────────────────────────────────────────────
+.pytest_cache/
+htmlcov/
+.coverage
+
+# ── web/model.onnx — INCLUDE this (needed for GitHub Pages) ───
+# model.onnx is NOT ignored — it must be in the repo for the
+# web app to work. It will be ~5–15MB which is fine for GitHub.
+# If it exceeds 50MB, use Git LFS (instructions in README).
