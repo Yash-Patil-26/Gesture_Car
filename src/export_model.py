@@ -16,7 +16,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from config import MODEL_FILE, ENCODER_FILE, BASE_DIR
 
-WEB_DIR    = os.path.join(BASE_DIR, "web")
+WEB_DIR    = os.path.join(BASE_DIR, "docs")
 ONNX_FILE  = os.path.join(WEB_DIR, "model.onnx")
 LABELS_FILE= os.path.join(WEB_DIR, "labels.json")
 
